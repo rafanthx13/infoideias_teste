@@ -15,14 +15,21 @@ class Funcoes
 
      * */
     public function SeculoAno(int $ano): int {
-        
+        return intdiv($ano + 99, 100);
     }
 
     
 	
 	
 	
-	
+	function primeCheck($number): bool {
+	    if ($number == 1) return false;
+	    for ($i = 2; $i <= $number/2; $i++){
+	        if ($number % $i == 0)
+	            return false;
+	    }
+	    return true;
+	}
 	
 	
 	
@@ -36,8 +43,18 @@ class Funcoes
     Número = 29 resposta = 23
 
      * */
+
     public function PrimoAnterior(int $numero): int {
-        
+        while($numero > 1){
+			$numero = $numero - 1;
+			if($this->primeCheck($numero) == true){
+				return $numero;
+			}
+			if($numero <= 1){
+				return 1;
+			}
+		}
+		return 1;
     }
 
 
@@ -66,13 +83,45 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $max_el = NULL;
+    	$second_max_el = NULL;
+    	$count = 0;
+    	foreach ($arr as $key => $subarray) {
+    		foreach ($subarray as $key => $value) {
+    			if($count == 0){
+    				$max_el = $value;
+    				$count = 1;
+    			}
+    			if($value > $max_el){
+    				$second_max_el = $max_el;
+    				$max_el = $value;
+    			}
+
+    		}
+    	}
+    	return $second_max_el;
     }
 	
 	
 	
 	
-	
+	 public function test_is_crescent($arr): bool {
+     	$ant = NULL;
+     	$count = 0;
+    	foreach ($arr as $key => $value) {
+			if($count == 0){
+				$ant = $value;
+				$count = 1;
+			} else {
+				if($value > $ant){
+					$ant = $value;
+				} else {
+					return false;
+				}
+			}
+  		}
+		return true;
+     }
 	
 	
 
@@ -105,8 +154,22 @@ class Funcoes
     [3, 5, 67, 98, 3] true
 
      * */
-    
-	public function SequenciaCrescente(array $arr): boolean {
-        
+    // boolean deveria ser trocado para 'bool'
+	public function SequenciaCrescente(array $arr): bool {
+        $ant = NULL;
+     	$count = 0;
+    	foreach ($arr as $key => $value) {
+			if($count == 0){
+				$ant = $value;
+				$count = 1;
+			} else {
+				if($value > $ant){
+					$ant = $value;
+				} else {
+					return false;
+				}
+			}
+  		}
+		return true;
     }
 }
